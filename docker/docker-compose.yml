@@ -1,0 +1,17 @@
+version: '3'
+services:
+  di-mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+    container_name: di-mysql
+    network_mode: bridge
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_DATABASE: di
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: pass
+    volumes:
+      - ./var/mysqldb:/var/lib/mysql

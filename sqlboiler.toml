@@ -1,0 +1,7 @@
+[mysql]
+dbname = "di"
+user   = "admin"
+pass   = "pass"
+host   = "localhost"
+port    = 3306
+sslmode = "false"
