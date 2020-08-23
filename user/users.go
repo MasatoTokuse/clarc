@@ -6,6 +6,7 @@ import (
 
 	"github.com/mtoku/di/models"
 	"github.com/volatiletech/sqlboiler/v4/boil"
+	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
 func NewUserRepository(context context.Context, db *sql.DB) UserRepository {
@@ -20,25 +21,40 @@ type UserRepository struct {
 	Context context.Context
 }
 
-func (repo UserRepository) Insert() (models.User, error) {
+func (repo UserRepository) Regist(user models.User) (models.User, error) {
+
 	tx, err := repo.DB.Begin()
 	if err != nil {
 		return models.User{}, err
 	}
 
-	user := models.User{
-		UserID:   "mst11",
-		Password: "pass",
-		Nickname: "tks",
-	}
-
-	err = user.Insert(repo.Context, tx, boil.Infer())
-	if err != nil {
+	if err := user.Insert(repo.Context, tx, boil.Infer()); err != nil {
 		return models.User{}, err
 	}
 
 	if err := tx.Commit(); err != nil {
 		return models.User{}, err
+	}
+
+	return user, nil
+}
+
+func (repo UserRepository) FindBy(userID, password, nickname string) (*models.User, error) {
+
+	qm := make([]qm.QueryMod, 0)
+	if userID != "" {
+		qm = append(qm, models.UserWhere.UserID.EQ(userID))
+	}
+	if password != "" {
+		qm = append(qm, models.UserWhere.Password.EQ(password))
+	}
+	if nickname != "" {
+		qm = append(qm, models.UserWhere.Nickname.EQ(nickname))
+	}
+
+	user, err := models.Users(qm...).One(repo.Context, repo.DB)
+	if err != nil {
+		return &models.User{}, err
 	}
 
 	return user, nil

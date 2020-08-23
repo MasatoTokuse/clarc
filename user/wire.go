@@ -8,7 +8,7 @@ import (
 	"github.com/google/wire"
 )
 
-func InitializeUserRepository(constr MySQLConnectionString, ctx context.Context) (UserRepository, error) {
-	wire.Build(NewUserRepository, NewMySQLDB)
+func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (UserRepository, error) {
+	wire.Build(NewUserRepository, NewDB)
 	return UserRepository{}, nil
 }

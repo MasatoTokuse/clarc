@@ -8,9 +8,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type MySQLConnectionString string
+type DBConnectionString string
 
-func NewMySQLDB(constr MySQLConnectionString) (*sql.DB, error) {
+func NewDB(constr DBConnectionString) (*sql.DB, error) {
 	db, err := sql.Open("mysql", string(constr))
 	if err != nil {
 		return nil, err
@@ -18,7 +18,7 @@ func NewMySQLDB(constr MySQLConnectionString) (*sql.DB, error) {
 	return db, nil
 }
 
-func NewTestMySQLConnectionString() MySQLConnectionString {
+func NewTestMySQLConnectionString() DBConnectionString {
 	cnf := mysql.NewConfig()
 	cnf.User = "admin"
 	cnf.Passwd = "pass"
@@ -27,5 +27,25 @@ func NewTestMySQLConnectionString() MySQLConnectionString {
 	cnf.DBName = "di"
 	cnf.ParseTime = true
 	cnf.Loc = time.Local
-	return MySQLConnectionString(cnf.FormatDSN())
+	return DBConnectionString(cnf.FormatDSN())
+}
+
+func NewMockFailedDB(constr DBConnectionString) (*sql.DB, error) {
+	db, err := sql.Open("mysql", string(constr))
+	if err != nil {
+		return nil, err
+	}
+	return db, nil
+}
+
+func NewMockDBConnectionString() DBConnectionString {
+	cnf := mysql.NewConfig()
+	cnf.User = "admin"
+	cnf.Passwd = "pass"
+	cnf.Net = "tcp"
+	cnf.Addr = "localhost:3306"
+	cnf.DBName = "di"
+	cnf.ParseTime = true
+	cnf.Loc = time.Local
+	return DBConnectionString(cnf.FormatDSN())
 }

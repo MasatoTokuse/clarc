@@ -4,8 +4,8 @@ import (
 	"testing"
 )
 
-func TestNewMySQLDB(t *testing.T) {
-	db, err := NewMySQLDB(NewTestMySQLConnectionString())
+func TestNewDB(t *testing.T) {
+	db, err := NewDB(NewTestMySQLConnectionString())
 	dieIf(err)
 	err = db.Ping()
 	dieIf(err)
