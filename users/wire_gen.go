@@ -23,3 +23,12 @@ func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (U
 	userRepository := NewUserRepository(ctx, db)
 	return userRepository, nil
 }
+
+func InitializeUserService(constr DBConnectionString, ctx context.Context) (UserService, error) {
+	userRepository, err := InitializeUserRepository(constr, ctx)
+	if err != nil {
+		return UserService{}, err
+	}
+	userService := NewUserService(userRepository)
+	return userService, nil
+}

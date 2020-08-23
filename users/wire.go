@@ -12,3 +12,8 @@ func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (U
 	wire.Build(NewUserRepository, NewDB)
 	return UserRepository{}, nil
 }
+
+func InitializeUserService(constr DBConnectionString, ctx context.Context) (UserService, error) {
+	wire.Build(NewUserService, InitializeUserRepository)
+	return UserService{}, nil
+}
