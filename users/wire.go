@@ -18,3 +18,8 @@ func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx c
 	wire.Build(NewUserCreateService, InitializeUserRepository)
 	return UserCreateService{}, nil
 }
+
+func InitializeUserController(constr infrastructure.DBConnectionString, ctx context.Context) (UserController, error) {
+	wire.Build(NewUserController, InitializeUserCreateService)
+	return UserController{}, nil
+}

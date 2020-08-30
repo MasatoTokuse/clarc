@@ -29,3 +29,12 @@ func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx c
 	iUserCreateService := NewUserCreateService(iUserRepository)
 	return iUserCreateService, nil
 }
+
+func InitializeUserController(constr infrastructure.DBConnectionString, ctx context.Context) (UserController, error) {
+	iUserCreateService, err := InitializeUserCreateService(constr, ctx)
+	if err != nil {
+		return UserController{}, err
+	}
+	userController := NewUserController(iUserCreateService)
+	return userController, nil
+}
