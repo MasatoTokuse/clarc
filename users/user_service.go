@@ -1,13 +1,13 @@
 package users
 
-func NewUserService(repo UserRepository) UserService {
+func NewUserService(repo IUserRepository) UserService {
 	return UserService{
 		Repository: repo,
 	}
 }
 
 type UserService struct {
-	Repository UserRepository
+	Repository IUserRepository
 }
 
 // func(serv UserService)FindBy(){}

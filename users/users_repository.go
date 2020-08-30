@@ -9,7 +9,14 @@ import (
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
-func NewUserRepository(context context.Context, db *sql.DB) UserRepository {
+type IUserRepository interface {
+	Save(user models.User) (*models.User, error)
+	FindBy(userID, password, nickname string) (*models.User, error)
+	Remove(user models.User) (*models.User, error)
+	CloseDB() error
+}
+
+func NewUserRepository(context context.Context, db *sql.DB) IUserRepository {
 	return UserRepository{
 		DB:      db,
 		Context: context,
@@ -21,22 +28,22 @@ type UserRepository struct {
 	Context context.Context
 }
 
-func (repo UserRepository) Regist(user models.User) (models.User, error) {
+func (repo UserRepository) Save(user models.User) (*models.User, error) {
 
 	tx, err := repo.DB.Begin()
 	if err != nil {
-		return models.User{}, err
+		return &models.User{}, err
 	}
 
 	if err := user.Insert(repo.Context, tx, boil.Infer()); err != nil {
-		return models.User{}, err
+		return &models.User{}, err
 	}
 
 	if err := tx.Commit(); err != nil {
-		return models.User{}, err
+		return &models.User{}, err
 	}
 
-	return user, nil
+	return &user, nil
 }
 
 func (repo UserRepository) FindBy(userID, password, nickname string) (*models.User, error) {
@@ -58,4 +65,26 @@ func (repo UserRepository) FindBy(userID, password, nickname string) (*models.Us
 	}
 
 	return user, nil
+}
+
+func (repo UserRepository) Remove(user models.User) (*models.User, error) {
+
+	tx, err := repo.DB.Begin()
+	if err != nil {
+		return &models.User{}, err
+	}
+
+	if _, err := user.Delete(repo.Context, tx); err != nil {
+		return &models.User{}, err
+	}
+
+	if err := tx.Commit(); err != nil {
+		return &models.User{}, err
+	}
+
+	return &user, nil
+}
+
+func (repo UserRepository) CloseDB() error {
+	return repo.DB.Close()
 }

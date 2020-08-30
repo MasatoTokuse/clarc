@@ -8,7 +8,7 @@ import (
 	"github.com/google/wire"
 )
 
-func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (UserRepository, error) {
+func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (IUserRepository, error) {
 	wire.Build(NewUserRepository, NewDB)
 	return UserRepository{}, nil
 }

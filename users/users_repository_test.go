@@ -2,50 +2,39 @@ package users
 
 import (
 	"context"
-	"fmt"
 	"testing"
 
 	"github.com/mtoku/di/models"
 )
 
-func TestRegistUser(t *testing.T) {
+func TestSaveFindRemoveUser(t *testing.T) {
 
 	constr := NewTestMySQLConnectionString()
 	repo, err := InitializeUserRepository(constr, context.TODO())
 	if err != nil {
 		t.Error(err)
 	}
-	defer repo.DB.Close()
-	user := models.User{
+	defer repo.CloseDB()
+
+	expected := &models.User{
 		UserID:   "mst11",
 		Password: "pass",
 		Nickname: "tks",
 	}
-	user, err = repo.Regist(user)
-	if err != nil {
-		t.Error(err)
+	result, err := repo.Save(*expected)
+	if result.ID == 0 {
+		t.Error("user.ID must not be Zero after save")
 	}
-	fmt.Println(user)
-}
 
-func TestFindUserBy(t *testing.T) {
-
-	constr := NewTestMySQLConnectionString()
-	repo, err := InitializeUserRepository(constr, context.TODO())
-	if err != nil {
-		t.Error(err)
-	}
-	defer repo.DB.Close()
-
-	expected := models.User{
-		UserID:   "mst11",
-		Password: "",
-		Nickname: "",
-	}
 	user, err := repo.FindBy(expected.UserID, expected.Password, expected.Nickname)
 	if err != nil {
 		t.Error(err)
 	}
 
-	fmt.Println(user)
+	repo.Remove(*user)
+
+	user, err = repo.FindBy(expected.UserID, expected.Password, expected.Nickname)
+	if err == nil {
+		t.Error(err)
+	}
 }

@@ -15,20 +15,20 @@ import (
 
 // Injectors from wire.go:
 
-func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (UserRepository, error) {
+func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (IUserRepository, error) {
 	db, err := NewDB(constr)
 	if err != nil {
-		return UserRepository{}, err
+		return nil, err
 	}
-	userRepository := NewUserRepository(ctx, db)
-	return userRepository, nil
+	iUserRepository := NewUserRepository(ctx, db)
+	return iUserRepository, nil
 }
 
 func InitializeUserService(constr DBConnectionString, ctx context.Context) (UserService, error) {
-	userRepository, err := InitializeUserRepository(constr, ctx)
+	iUserRepository, err := InitializeUserRepository(constr, ctx)
 	if err != nil {
 		return UserService{}, err
 	}
-	userService := NewUserService(userRepository)
+	userService := NewUserService(iUserRepository)
 	return userService, nil
 }
