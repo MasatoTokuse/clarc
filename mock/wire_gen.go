@@ -15,3 +15,12 @@ func InitializeInMemoryUserRepository() (users.IUserRepository, error) {
 	iUserRepository := NewInMemoryUserRepository()
 	return iUserRepository, nil
 }
+
+func InitializeMockUserCreateService() (users.IUserCreateService, error) {
+	iUserRepository, err := InitializeInMemoryUserRepository()
+	if err != nil {
+		return nil, err
+	}
+	iUserCreateService := users.NewUserCreateService(iUserRepository)
+	return iUserCreateService, nil
+}
