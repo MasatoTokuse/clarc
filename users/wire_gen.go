@@ -24,11 +24,11 @@ func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (I
 	return iUserRepository, nil
 }
 
-func InitializeUserService(constr DBConnectionString, ctx context.Context) (UserService, error) {
+func InitializeUserCreateService(constr DBConnectionString, ctx context.Context) (IUserCreateService, error) {
 	iUserRepository, err := InitializeUserRepository(constr, ctx)
 	if err != nil {
-		return UserService{}, err
+		return nil, err
 	}
-	userService := NewUserService(iUserRepository)
-	return userService, nil
+	iUserCreateService := NewUserCreateService(iUserRepository)
+	return iUserCreateService, nil
 }

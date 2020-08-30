@@ -13,7 +13,7 @@ func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (I
 	return UserRepository{}, nil
 }
 
-func InitializeUserService(constr DBConnectionString, ctx context.Context) (UserService, error) {
-	wire.Build(NewUserService, InitializeUserRepository)
-	return UserService{}, nil
+func InitializeUserCreateService(constr DBConnectionString, ctx context.Context) (IUserCreateService, error) {
+	wire.Build(NewUserCreateService, InitializeUserRepository)
+	return UserCreateService{}, nil
 }
