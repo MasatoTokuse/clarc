@@ -3,17 +3,19 @@ package users
 import (
 	"context"
 	"testing"
+
+	"github.com/mtoku/di/infrastructure"
 )
 
 func TestNewUserCreateService(t *testing.T) {
-	_, err := InitializeUserCreateService(NewTestMySQLConnectionString(), context.TODO())
+	_, err := InitializeUserCreateService(infrastructure.NewTestMySQLConnectionString(), context.TODO())
 	if err != nil {
 		t.Error(err)
 	}
 }
 
 func TestUserCreateService(t *testing.T) {
-	iUserCreateService, err := InitializeUserCreateService(NewTestMySQLConnectionString(), context.TODO())
+	iUserCreateService, err := InitializeUserCreateService(infrastructure.NewTestMySQLConnectionString(), context.TODO())
 	if err != nil {
 		t.Error(err)
 	}

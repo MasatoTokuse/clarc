@@ -4,12 +4,13 @@ import (
 	"context"
 	"testing"
 
+	"github.com/mtoku/di/infrastructure"
 	"github.com/mtoku/di/models"
 )
 
 func TestSaveFindRemoveUser(t *testing.T) {
 
-	constr := NewTestMySQLConnectionString()
+	constr := infrastructure.NewTestMySQLConnectionString()
 	repo, err := InitializeUserRepository(constr, context.TODO())
 	if err != nil {
 		t.Error(err)

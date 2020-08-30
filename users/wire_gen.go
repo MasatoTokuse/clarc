@@ -7,16 +7,13 @@ package users
 
 import (
 	"context"
-)
-
-import (
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/mtoku/di/infrastructure"
 )
 
 // Injectors from wire.go:
 
-func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (IUserRepository, error) {
-	db, err := NewDB(constr)
+func InitializeUserRepository(constr infrastructure.DBConnectionString, ctx context.Context) (IUserRepository, error) {
+	db, err := infrastructure.NewDB(constr)
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +21,7 @@ func InitializeUserRepository(constr DBConnectionString, ctx context.Context) (I
 	return iUserRepository, nil
 }
 
-func InitializeUserCreateService(constr DBConnectionString, ctx context.Context) (IUserCreateService, error) {
+func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx context.Context) (IUserCreateService, error) {
 	iUserRepository, err := InitializeUserRepository(constr, ctx)
 	if err != nil {
 		return nil, err
