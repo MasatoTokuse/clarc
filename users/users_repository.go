@@ -30,6 +30,10 @@ type UserRepository struct {
 
 func (repo UserRepository) Save(user models.User) (*models.User, error) {
 
+	if err := user.Valid(); err != nil {
+		return &models.User{}, err
+	}
+
 	tx, err := repo.DB.Begin()
 	if err != nil {
 		return &models.User{}, err
