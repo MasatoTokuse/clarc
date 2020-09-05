@@ -1,0 +1,3 @@
+# !/bin/bash
+# test all sub packages
+go test ./...

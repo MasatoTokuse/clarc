@@ -1,4 +1,4 @@
 #!/bin/bash
 
+cd app
 sqlboiler mysql
-mv models app/models
