@@ -1,9 +1,4 @@
-package users
-
-type UserCreateResult struct {
-	Status  string `json:"Status"`
-	Message string `json:"Message"`
-}
+package input_data
 
 type APIUserCreateRequest struct {
 	UserID   string `json:"UserID"`

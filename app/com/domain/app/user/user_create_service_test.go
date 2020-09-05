@@ -1,10 +1,10 @@
-package users
+package user
 
 import (
 	"context"
 	"testing"
 
-	"github.com/mtoku/di/infrastructure"
+	"github.com/mtoku/di/app/infrastructure"
 )
 
 func TestNewUserCreateService(t *testing.T) {

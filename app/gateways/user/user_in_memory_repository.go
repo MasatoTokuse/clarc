@@ -1,13 +1,12 @@
-package mock
+package user
 
 import (
 	"fmt"
 
-	"github.com/mtoku/di/models"
-	"github.com/mtoku/di/users"
+	"github.com/mtoku/di/app/models"
 )
 
-func NewInMemoryUserRepository() users.IUserRepository {
+func NewInMemoryUserRepository() IUserRepository {
 	return &InMemoryUserRepository{increment: 1}
 }
 

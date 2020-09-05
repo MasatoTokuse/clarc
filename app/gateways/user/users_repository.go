@@ -1,10 +1,10 @@
-package users
+package user
 
 import (
 	"context"
 	"database/sql"
 
-	"github.com/mtoku/di/models"
+	"github.com/mtoku/di/app/models"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )

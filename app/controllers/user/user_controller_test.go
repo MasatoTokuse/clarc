@@ -1,4 +1,4 @@
-package users
+package user
 
 import (
 	"bytes"
@@ -7,7 +7,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mtoku/di/infrastructure"
+	"github.com/mtoku/di/app/com/usecase/input_data"
+	"github.com/mtoku/di/app/com/usecase/output_data"
+	"github.com/mtoku/di/app/infrastructure"
 )
 
 func TestNewUserController(t *testing.T) {
@@ -23,7 +25,7 @@ func TestUserController_Create(t *testing.T) {
 	}
 
 	// テスト用のリクエストとレスポンスを作成
-	apiUserCreateRequest := &APIUserCreateRequest{
+	apiUserCreateRequest := &input_data.APIUserCreateRequest{
 		UserID:   "UserController_Create.UserID",
 		Password: "UserController_Create.Password",
 		Nickname: "UserController_Create.Nickname",
@@ -44,7 +46,7 @@ func TestUserController_Create(t *testing.T) {
 	}
 
 	// レスポンスのボディのテスト
-	userCreateResult := &UserCreateResult{}
+	userCreateResult := &output_data.UserCreateResult{}
 	err = userCreateResult.UnmarshalJSON(res.Body.Bytes())
 	if err != nil {
 		t.Error(err)

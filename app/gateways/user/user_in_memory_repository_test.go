@@ -1,9 +1,9 @@
-package mock
+package user
 
 import (
 	"testing"
 
-	"github.com/mtoku/di/models"
+	"github.com/mtoku/di/app/models"
 )
 
 func TestInMemoryUserRepository(t *testing.T) {
