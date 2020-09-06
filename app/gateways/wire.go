@@ -14,7 +14,7 @@ func InitializeUserRepository(constr infrastructure.DBConnectionString, ctx cont
 	return UserRepository{}, nil
 }
 
-func InitializeInMemoryUserRepository() (IUserRepository, error) {
+func InitializeInMemoryUserRepository() (InMemoryUserRepository, error) {
 	wire.Build(NewInMemoryUserRepository)
-	return &InMemoryUserRepository{}, nil
+	return InMemoryUserRepository{}, nil
 }

@@ -21,7 +21,7 @@ func InitializeUserRepository(constr infrastructure.DBConnectionString, ctx cont
 	return userRepository, nil
 }
 
-func InitializeInMemoryUserRepository() (IUserRepository, error) {
-	iUserRepository := NewInMemoryUserRepository()
-	return iUserRepository, nil
+func InitializeInMemoryUserRepository() (InMemoryUserRepository, error) {
+	inMemoryUserRepository := NewInMemoryUserRepository()
+	return inMemoryUserRepository, nil
 }

@@ -6,8 +6,8 @@ import (
 	"github.com/mtoku/di/app/models"
 )
 
-func NewInMemoryUserRepository() IUserRepository {
-	return &InMemoryUserRepository{increment: 1}
+func NewInMemoryUserRepository() InMemoryUserRepository {
+	return InMemoryUserRepository{increment: 1}
 }
 
 type InMemoryUserRepository struct {
