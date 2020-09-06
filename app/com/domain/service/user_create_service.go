@@ -1,38 +1,14 @@
 package service
 
 import (
-	"fmt"
-
+	"github.com/mtoku/di/app/com/usecase/inputdata"
+	"github.com/mtoku/di/app/com/usecase/outputdata"
 	"github.com/mtoku/di/app/gateways"
 	"github.com/mtoku/di/app/models"
 )
 
-type UserCreateRequest struct {
-	UserID   string
-	Password string
-	Nickname string
-}
-
-func (req UserCreateRequest) Valid() error {
-	// IsEmpty
-	if req.UserID == "" {
-		return fmt.Errorf("UserID is Empty. Please enter UserID.")
-	}
-	if req.Password == "" {
-		return fmt.Errorf("Password is Empty. Please enter Password.")
-	}
-	if req.Nickname == "" {
-		return fmt.Errorf("Nickname is Empty. Please enter Nickname.")
-	}
-	return nil
-}
-
-type UserCreateResponse struct {
-	Error error
-}
-
 type IUserCreateService interface {
-	Handle(req UserCreateRequest) UserCreateResponse
+	Handle(req inputdata.UserCreateRequest) outputdata.UserCreateResponse
 }
 
 func NewUserCreateService(repo gateways.IUserRepository) IUserCreateService {
@@ -45,12 +21,12 @@ type UserCreateService struct {
 	Repository gateways.IUserRepository
 }
 
-func (service UserCreateService) Handle(req UserCreateRequest) UserCreateResponse {
+func (service UserCreateService) Handle(req inputdata.UserCreateRequest) outputdata.UserCreateResponse {
 	defer service.Repository.CloseDB()
 
 	// Validation
 	if err := req.Valid(); err != nil {
-		return UserCreateResponse{
+		return outputdata.UserCreateResponse{
 			Error: err,
 		}
 	}
@@ -60,9 +36,9 @@ func (service UserCreateService) Handle(req UserCreateRequest) UserCreateRespons
 		Nickname: req.Nickname,
 	}
 	if _, err := service.Repository.Save(user); err != nil {
-		return UserCreateResponse{
+		return outputdata.UserCreateResponse{
 			Error: err,
 		}
 	}
-	return UserCreateResponse{}
+	return outputdata.UserCreateResponse{}
 }

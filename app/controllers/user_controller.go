@@ -5,9 +5,10 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/mtoku/di/app/api/request"
+	"github.com/mtoku/di/app/api/result"
 	"github.com/mtoku/di/app/com/domain/service"
 	"github.com/mtoku/di/app/com/usecase/inputdata"
-	"github.com/mtoku/di/app/com/usecase/outputdata"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -23,7 +24,7 @@ type UserController struct {
 
 func (controller UserController) Create(w http.ResponseWriter, r *http.Request) {
 
-	userCreateResult := outputdata.UserCreateResult{
+	userCreateResult := result.UserCreateAPIResult{
 		Status:  "0",
 		Message: "Success",
 	}
@@ -50,12 +51,12 @@ func (controller UserController) Create(w http.ResponseWriter, r *http.Request) 
 	return
 }
 
-func (controller UserController) newUserCreateRequest(r *http.Request) (req service.UserCreateRequest, err error) {
+func (controller UserController) newUserCreateRequest(r *http.Request) (req inputdata.UserCreateRequest, err error) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		return
 	}
-	apiReq := &inputdata.APIUserCreateRequest{}
+	apiReq := &request.UserCreateAPIRequest{}
 	err = apiReq.UnmarshalJSON(body)
 	if err != nil {
 		return

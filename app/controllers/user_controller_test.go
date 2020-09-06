@@ -7,9 +7,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mtoku/di/app/com/usecase/inputdata"
-	"github.com/mtoku/di/app/com/usecase/outputdata"
+	"github.com/mtoku/di/app/api/request"
+	"github.com/mtoku/di/app/api/result"
 	"github.com/mtoku/di/app/infrastructure"
+	"github.com/mtoku/di/app/testhelper"
 )
 
 func TestNewUserController(t *testing.T) {
@@ -19,13 +20,20 @@ func TestNewUserController(t *testing.T) {
 	}
 }
 func TestUserController_Create(t *testing.T) {
+	db, err := infrastructure.NewDB(infrastructure.NewTestMySQLConnectionString())
+	if err != nil {
+		t.Error(err)
+	}
+	defer db.Close()
+	testhelper.Cleanup(db)
+
 	controller, err := InitializeUserController(infrastructure.NewTestMySQLConnectionString(), context.TODO())
 	if err != nil {
 		t.Error(err)
 	}
 
 	// テスト用のリクエストとレスポンスを作成
-	apiUserCreateRequest := &inputdata.APIUserCreateRequest{
+	apiUserCreateRequest := &request.UserCreateAPIRequest{
 		UserID:   "UserController_Create.UserID",
 		Password: "UserController_Create.Password",
 		Nickname: "UserController_Create.Nickname",
@@ -46,7 +54,7 @@ func TestUserController_Create(t *testing.T) {
 	}
 
 	// レスポンスのボディのテスト
-	userCreateResult := &outputdata.UserCreateResult{}
+	userCreateResult := &result.UserCreateAPIResult{}
 	err = userCreateResult.UnmarshalJSON(res.Body.Bytes())
 	if err != nil {
 		t.Error(err)
