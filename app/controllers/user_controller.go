@@ -7,19 +7,19 @@ import (
 
 	"github.com/mtoku/di/app/api/request"
 	"github.com/mtoku/di/app/api/result"
-	"github.com/mtoku/di/app/com/domain/service"
+	"github.com/mtoku/di/app/com/usecase"
 	"github.com/mtoku/di/app/com/usecase/inputdata"
 	log "github.com/sirupsen/logrus"
 )
 
-func NewUserController(createService service.IUserCreateService) UserController {
+func NewUserController(createService usecase.IUserCreateService) UserController {
 	return UserController{
 		UserCreateService: createService,
 	}
 }
 
 type UserController struct {
-	UserCreateService service.IUserCreateService
+	UserCreateService usecase.IUserCreateService
 }
 
 func (controller UserController) Create(w http.ResponseWriter, r *http.Request) {

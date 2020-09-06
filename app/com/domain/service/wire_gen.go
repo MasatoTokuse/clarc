@@ -7,13 +7,14 @@ package service
 
 import (
 	"context"
+	"github.com/mtoku/di/app/com/usecase"
 	"github.com/mtoku/di/app/gateways"
 	"github.com/mtoku/di/app/infrastructure"
 )
 
 // Injectors from wire.go:
 
-func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx context.Context) (IUserCreateService, error) {
+func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx context.Context) (usecase.IUserCreateService, error) {
 	iUserRepository, err := gateways.InitializeUserRepository(constr, ctx)
 	if err != nil {
 		return nil, err
