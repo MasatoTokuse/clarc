@@ -1,9 +1,9 @@
-package user
+package service
 
 import (
 	"fmt"
 
-	"github.com/mtoku/di/app/gateways/user"
+	"github.com/mtoku/di/app/gateways"
 	"github.com/mtoku/di/app/models"
 )
 
@@ -35,14 +35,14 @@ type IUserCreateService interface {
 	Handle(req UserCreateRequest) UserCreateResponse
 }
 
-func NewUserCreateService(repo user.IUserRepository) IUserCreateService {
+func NewUserCreateService(repo gateways.IUserRepository) IUserCreateService {
 	return UserCreateService{
 		Repository: repo,
 	}
 }
 
 type UserCreateService struct {
-	Repository user.IUserRepository
+	Repository gateways.IUserRepository
 }
 
 func (service UserCreateService) Handle(req UserCreateRequest) UserCreateResponse {

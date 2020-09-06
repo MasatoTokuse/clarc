@@ -1,29 +1,29 @@
-package user
+package controllers
 
 import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
 
-	"github.com/mtoku/di/app/com/domain/app/user"
-	"github.com/mtoku/di/app/com/usecase/input_data"
-	"github.com/mtoku/di/app/com/usecase/output_data"
+	"github.com/mtoku/di/app/com/domain/service"
+	"github.com/mtoku/di/app/com/usecase/inputdata"
+	"github.com/mtoku/di/app/com/usecase/outputdata"
 	log "github.com/sirupsen/logrus"
 )
 
-func NewUserController(createService user.IUserCreateService) UserController {
+func NewUserController(createService service.IUserCreateService) UserController {
 	return UserController{
 		UserCreateService: createService,
 	}
 }
 
 type UserController struct {
-	UserCreateService user.IUserCreateService
+	UserCreateService service.IUserCreateService
 }
 
 func (controller UserController) Create(w http.ResponseWriter, r *http.Request) {
 
-	userCreateResult := output_data.UserCreateResult{
+	userCreateResult := outputdata.UserCreateResult{
 		Status:  "0",
 		Message: "Success",
 	}
@@ -50,12 +50,12 @@ func (controller UserController) Create(w http.ResponseWriter, r *http.Request) 
 	return
 }
 
-func (controller UserController) newUserCreateRequest(r *http.Request) (req user.UserCreateRequest, err error) {
+func (controller UserController) newUserCreateRequest(r *http.Request) (req service.UserCreateRequest, err error) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		return
 	}
-	apiReq := &input_data.APIUserCreateRequest{}
+	apiReq := &inputdata.APIUserCreateRequest{}
 	err = apiReq.UnmarshalJSON(body)
 	if err != nil {
 		return

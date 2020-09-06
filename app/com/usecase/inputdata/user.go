@@ -1,4 +1,4 @@
-package input_data
+package inputdata
 
 type APIUserCreateRequest struct {
 	UserID   string `json:"UserID"`

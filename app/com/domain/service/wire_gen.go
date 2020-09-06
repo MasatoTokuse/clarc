@@ -3,18 +3,18 @@
 //go:generate wire
 //+build !wireinject
 
-package user
+package service
 
 import (
 	"context"
-	"github.com/mtoku/di/app/gateways/user"
+	"github.com/mtoku/di/app/gateways"
 	"github.com/mtoku/di/app/infrastructure"
 )
 
 // Injectors from wire.go:
 
 func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx context.Context) (IUserCreateService, error) {
-	iUserRepository, err := user.InitializeUserRepository(constr, ctx)
+	iUserRepository, err := gateways.InitializeUserRepository(constr, ctx)
 	if err != nil {
 		return nil, err
 	}
