@@ -16,7 +16,7 @@ type IUserRepository interface {
 	CloseDB() error
 }
 
-func NewUserRepository(context context.Context, db *sql.DB) IUserRepository {
+func NewUserRepository(context context.Context, db *sql.DB) UserRepository {
 	return UserRepository{
 		DB:      db,
 		Context: context,

@@ -9,7 +9,7 @@ import (
 	"github.com/mtoku/di/app/infrastructure"
 )
 
-func InitializeUserRepository(constr infrastructure.DBConnectionString, ctx context.Context) (IUserRepository, error) {
+func InitializeUserRepository(constr infrastructure.DBConnectionString, ctx context.Context) (UserRepository, error) {
 	wire.Build(NewUserRepository, infrastructure.NewDB)
 	return UserRepository{}, nil
 }

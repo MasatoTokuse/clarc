@@ -7,17 +7,24 @@ package controllers
 
 import (
 	"context"
+	"github.com/google/wire"
 	"github.com/mtoku/di/app/com/domain/service"
+	"github.com/mtoku/di/app/com/usecase"
 	"github.com/mtoku/di/app/infrastructure"
 )
 
 // Injectors from wire.go:
 
 func InitializeUserController(constr infrastructure.DBConnectionString, ctx context.Context) (UserController, error) {
-	iUserCreateService, err := service.InitializeUserCreateService(constr, ctx)
+	userCreateService, err := service.InitializeUserCreateService(constr, ctx)
 	if err != nil {
 		return UserController{}, err
 	}
-	userController := NewUserController(iUserCreateService)
+	userController := NewUserController(userCreateService)
 	return userController, nil
 }
+
+// wire.go:
+
+var UserControllerSet = wire.NewSet(NewUserController, wire.Bind(new(usecase.IUserCreateService),
+	new(service.UserCreateService)), service.InitializeUserCreateService)

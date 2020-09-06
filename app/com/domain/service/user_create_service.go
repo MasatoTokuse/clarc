@@ -1,14 +1,13 @@
 package service
 
 import (
-	"github.com/mtoku/di/app/com/usecase"
 	"github.com/mtoku/di/app/com/usecase/inputdata"
 	"github.com/mtoku/di/app/com/usecase/outputdata"
 	"github.com/mtoku/di/app/gateways"
 	"github.com/mtoku/di/app/models"
 )
 
-func NewUserCreateService(repo gateways.IUserRepository) usecase.IUserCreateService {
+func NewUserCreateService(repo gateways.IUserRepository) UserCreateService {
 	return UserCreateService{
 		Repository: repo,
 	}

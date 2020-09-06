@@ -12,13 +12,13 @@ import (
 
 // Injectors from wire.go:
 
-func InitializeUserRepository(constr infrastructure.DBConnectionString, ctx context.Context) (IUserRepository, error) {
+func InitializeUserRepository(constr infrastructure.DBConnectionString, ctx context.Context) (UserRepository, error) {
 	db, err := infrastructure.NewDB(constr)
 	if err != nil {
-		return nil, err
+		return UserRepository{}, err
 	}
-	iUserRepository := NewUserRepository(ctx, db)
-	return iUserRepository, nil
+	userRepository := NewUserRepository(ctx, db)
+	return userRepository, nil
 }
 
 func InitializeInMemoryUserRepository() (IUserRepository, error) {
