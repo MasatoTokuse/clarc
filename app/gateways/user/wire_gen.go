@@ -3,7 +3,7 @@
 //go:generate wire
 //+build !wireinject
 
-package gateways
+package user
 
 import (
 	"context"

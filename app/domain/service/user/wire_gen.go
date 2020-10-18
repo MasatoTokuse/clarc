@@ -3,19 +3,19 @@
 //go:generate wire
 //+build !wireinject
 
-package service
+package user
 
 import (
 	"context"
 	"github.com/google/wire"
-	"github.com/mtoku/clarc/app/gateways"
+	"github.com/mtoku/clarc/app/gateways/user"
 	"github.com/mtoku/clarc/app/infrastructure"
 )
 
 // Injectors from wire.go:
 
 func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx context.Context) (UserCreateService, error) {
-	userRepository, err := gateways.InitializeUserRepository(constr, ctx)
+	userRepository, err := user.InitializeUserRepository(constr, ctx)
 	if err != nil {
 		return UserCreateService{}, err
 	}
@@ -25,4 +25,4 @@ func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx c
 
 // wire.go:
 
-var UserCreateServiceSet = wire.NewSet(NewUserCreateService, wire.Bind(new(gateways.IUserRepository), new(gateways.UserRepository)), gateways.InitializeUserRepository)
+var UserCreateServiceSet = wire.NewSet(NewUserCreateService, wire.Bind(new(user.IUserRepository), new(user.UserRepository)), user.InitializeUserRepository)

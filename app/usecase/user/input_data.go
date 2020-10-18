@@ -1,4 +1,4 @@
-package inputdata
+package user
 
 import "fmt"
 

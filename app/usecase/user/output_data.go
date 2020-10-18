@@ -1,4 +1,4 @@
-package outputdata
+package user
 
 type UserCreateResponse struct {
 	Error error

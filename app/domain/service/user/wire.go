@@ -1,12 +1,12 @@
 //+build wireinject
 
-package service
+package user
 
 import (
 	"context"
 
 	"github.com/google/wire"
-	"github.com/mtoku/clarc/app/gateways"
+	user_gateways "github.com/mtoku/clarc/app/gateways/user"
 	"github.com/mtoku/clarc/app/infrastructure"
 )
 
@@ -16,5 +16,5 @@ func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx c
 }
 
 var UserCreateServiceSet = wire.NewSet(NewUserCreateService,
-	wire.Bind(new(gateways.IUserRepository), new(gateways.UserRepository)),
-	gateways.InitializeUserRepository)
+	wire.Bind(new(user_gateways.IUserRepository), new(user_gateways.UserRepository)),
+	user_gateways.InitializeUserRepository)

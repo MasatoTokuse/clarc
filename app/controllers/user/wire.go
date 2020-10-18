@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/google/wire"
-	"github.com/mtoku/clarc/app/com/domain/service"
-	"github.com/mtoku/clarc/app/com/usecase"
+	"github.com/mtoku/clarc/app/domain/service/user"
 	"github.com/mtoku/clarc/app/infrastructure"
+	user_usecase "github.com/mtoku/clarc/app/usecase/user"
 )
 
 func InitializeUserController(constr infrastructure.DBConnectionString, ctx context.Context) (UserController, error) {
@@ -17,5 +17,5 @@ func InitializeUserController(constr infrastructure.DBConnectionString, ctx cont
 }
 
 var UserControllerSet = wire.NewSet(NewUserController,
-	wire.Bind(new(usecase.IUserCreateService),
-		new(service.UserCreateService)), service.InitializeUserCreateService)
+	wire.Bind(new(user_usecase.IUserCreateService),
+		new(user.UserCreateService)), user.InitializeUserCreateService)

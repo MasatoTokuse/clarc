@@ -1,12 +1,12 @@
-package service
+package user
 
 import (
 	"context"
 	"testing"
 
-	"github.com/mtoku/clarc/app/com/usecase/inputdata"
 	"github.com/mtoku/clarc/app/infrastructure"
 	"github.com/mtoku/clarc/app/testhelper"
+	user_usecase "github.com/mtoku/clarc/app/usecase/user"
 )
 
 func TestNewUserCreateService(t *testing.T) {
@@ -29,7 +29,7 @@ func TestUserCreateService(t *testing.T) {
 		t.Error(err)
 	}
 
-	req := inputdata.UserCreateRequest{
+	req := user_usecase.UserCreateRequest{
 		UserID:   "requestCreateUser.userID",
 		Password: "requestCreateUser.password",
 		Nickname: "requestCreateUser.nickname",

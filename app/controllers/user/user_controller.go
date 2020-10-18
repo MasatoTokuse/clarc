@@ -7,19 +7,18 @@ import (
 
 	"github.com/mtoku/clarc/app/api/request"
 	"github.com/mtoku/clarc/app/api/result"
-	"github.com/mtoku/clarc/app/com/usecase"
-	"github.com/mtoku/clarc/app/com/usecase/inputdata"
+	user_usecase "github.com/mtoku/clarc/app/usecase/user"
 	log "github.com/sirupsen/logrus"
 )
 
-func NewUserController(createService usecase.IUserCreateService) UserController {
+func NewUserController(createService user_usecase.IUserCreateService) UserController {
 	return UserController{
 		UserCreateService: createService,
 	}
 }
 
 type UserController struct {
-	UserCreateService usecase.IUserCreateService
+	UserCreateService user_usecase.IUserCreateService
 }
 
 func (controller UserController) Create(w http.ResponseWriter, r *http.Request) {
@@ -51,7 +50,7 @@ func (controller UserController) Create(w http.ResponseWriter, r *http.Request) 
 	return
 }
 
-func (controller UserController) newUserCreateRequest(r *http.Request) (req inputdata.UserCreateRequest, err error) {
+func (controller UserController) newUserCreateRequest(r *http.Request) (req user_usecase.UserCreateRequest, err error) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		return

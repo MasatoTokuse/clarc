@@ -8,15 +8,15 @@ package user
 import (
 	"context"
 	"github.com/google/wire"
-	"github.com/mtoku/clarc/app/com/domain/service"
-	"github.com/mtoku/clarc/app/com/usecase"
+	"github.com/mtoku/clarc/app/domain/service/user"
 	"github.com/mtoku/clarc/app/infrastructure"
+	user2 "github.com/mtoku/clarc/app/usecase/user"
 )
 
 // Injectors from wire.go:
 
 func InitializeUserController(constr infrastructure.DBConnectionString, ctx context.Context) (UserController, error) {
-	userCreateService, err := service.InitializeUserCreateService(constr, ctx)
+	userCreateService, err := user.InitializeUserCreateService(constr, ctx)
 	if err != nil {
 		return UserController{}, err
 	}
@@ -26,5 +26,5 @@ func InitializeUserController(constr infrastructure.DBConnectionString, ctx cont
 
 // wire.go:
 
-var UserControllerSet = wire.NewSet(NewUserController, wire.Bind(new(usecase.IUserCreateService),
-	new(service.UserCreateService)), service.InitializeUserCreateService)
+var UserControllerSet = wire.NewSet(NewUserController, wire.Bind(new(user2.IUserCreateService),
+	new(user.UserCreateService)), user.InitializeUserCreateService)

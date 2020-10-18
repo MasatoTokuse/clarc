@@ -1,6 +1,6 @@
 //+build wireinject
 
-package gateways
+package user
 
 import (
 	"context"
