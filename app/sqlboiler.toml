@@ -1,5 +1,5 @@
 [mysql]
-dbname = "di"
+dbname = "clarc"
 user   = "admin"
 pass   = "pass"
 host   = "localhost"

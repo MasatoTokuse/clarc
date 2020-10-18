@@ -3,7 +3,7 @@ package gateways
 import (
 	"testing"
 
-	"github.com/mtoku/di/app/models"
+	"github.com/mtoku/clarc/app/models"
 )
 
 func TestInMemoryUserRepository(t *testing.T) {

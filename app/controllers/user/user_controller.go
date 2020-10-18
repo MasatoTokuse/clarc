@@ -1,14 +1,14 @@
-package controllers
+package user
 
 import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
 
-	"github.com/mtoku/di/app/api/request"
-	"github.com/mtoku/di/app/api/result"
-	"github.com/mtoku/di/app/com/usecase"
-	"github.com/mtoku/di/app/com/usecase/inputdata"
+	"github.com/mtoku/clarc/app/api/request"
+	"github.com/mtoku/clarc/app/api/result"
+	"github.com/mtoku/clarc/app/com/usecase"
+	"github.com/mtoku/clarc/app/com/usecase/inputdata"
 	log "github.com/sirupsen/logrus"
 )
 

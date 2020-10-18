@@ -1,4 +1,4 @@
-module github.com/mtoku/di
+module github.com/mtoku/clarc
 
 go 1.13
 

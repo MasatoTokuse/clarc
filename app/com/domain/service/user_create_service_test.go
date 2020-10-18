@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/mtoku/di/app/com/usecase/inputdata"
-	"github.com/mtoku/di/app/infrastructure"
-	"github.com/mtoku/di/app/testhelper"
+	"github.com/mtoku/clarc/app/com/usecase/inputdata"
+	"github.com/mtoku/clarc/app/infrastructure"
+	"github.com/mtoku/clarc/app/testhelper"
 )
 
 func TestNewUserCreateService(t *testing.T) {

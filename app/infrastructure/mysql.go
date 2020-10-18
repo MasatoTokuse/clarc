@@ -24,7 +24,7 @@ func NewTestMySQLConnectionString() DBConnectionString {
 	cnf.Passwd = "pass"
 	cnf.Net = "tcp"
 	cnf.Addr = "localhost:3306"
-	cnf.DBName = "di"
+	cnf.DBName = "clarc"
 	cnf.ParseTime = true
 	cnf.Loc = time.Local
 	return DBConnectionString(cnf.FormatDSN())
@@ -44,7 +44,7 @@ func NewMockDBConnectionString() DBConnectionString {
 	cnf.Passwd = "pass"
 	cnf.Net = "tcp"
 	cnf.Addr = "localhost:3306"
-	cnf.DBName = "di"
+	cnf.DBName = "clarc"
 	cnf.ParseTime = true
 	cnf.Loc = time.Local
 	return DBConnectionString(cnf.FormatDSN())

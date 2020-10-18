@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/mtoku/di/app/infrastructure"
-	"github.com/mtoku/di/app/models"
+	"github.com/mtoku/clarc/app/infrastructure"
+	"github.com/mtoku/clarc/app/models"
 )
 
 func TestSaveFindRemoveUser(t *testing.T) {

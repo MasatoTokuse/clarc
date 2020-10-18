@@ -7,7 +7,7 @@ package gateways
 
 import (
 	"context"
-	"github.com/mtoku/di/app/infrastructure"
+	"github.com/mtoku/clarc/app/infrastructure"
 )
 
 // Injectors from wire.go:

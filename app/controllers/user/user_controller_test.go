@@ -1,4 +1,4 @@
-package controllers
+package user
 
 import (
 	"bytes"
@@ -7,10 +7,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mtoku/di/app/api/request"
-	"github.com/mtoku/di/app/api/result"
-	"github.com/mtoku/di/app/infrastructure"
-	"github.com/mtoku/di/app/testhelper"
+	"github.com/mtoku/clarc/app/api/request"
+	"github.com/mtoku/clarc/app/api/result"
+	"github.com/mtoku/clarc/app/infrastructure"
+	"github.com/mtoku/clarc/app/testhelper"
 )
 
 func TestNewUserController(t *testing.T) {

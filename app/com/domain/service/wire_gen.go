@@ -8,8 +8,8 @@ package service
 import (
 	"context"
 	"github.com/google/wire"
-	"github.com/mtoku/di/app/gateways"
-	"github.com/mtoku/di/app/infrastructure"
+	"github.com/mtoku/clarc/app/gateways"
+	"github.com/mtoku/clarc/app/infrastructure"
 )
 
 // Injectors from wire.go:

@@ -1,16 +1,16 @@
 version: '3'
 services:
-  di-mysql:
+  clarc-mysql:
     build:
       context: .
       dockerfile: Dockerfile.mysql
-    container_name: di-mysql
+    container_name: clarc-mysql
     network_mode: bridge
     ports:
-      - "3306:3306"
+      - '3306:3306'
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
-      MYSQL_DATABASE: di
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      MYSQL_DATABASE: clarc
       MYSQL_USER: admin
       MYSQL_PASSWORD: pass
     volumes:

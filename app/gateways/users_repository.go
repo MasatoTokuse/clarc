@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/mtoku/di/app/models"
+	"github.com/mtoku/clarc/app/models"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )

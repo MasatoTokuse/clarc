@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/mtoku/di/app/com/usecase/inputdata"
-	"github.com/mtoku/di/app/com/usecase/outputdata"
-	"github.com/mtoku/di/app/gateways"
-	"github.com/mtoku/di/app/models"
+	"github.com/mtoku/clarc/app/com/usecase/inputdata"
+	"github.com/mtoku/clarc/app/com/usecase/outputdata"
+	"github.com/mtoku/clarc/app/gateways"
+	"github.com/mtoku/clarc/app/models"
 )
 
 func NewUserCreateService(repo gateways.IUserRepository) UserCreateService {

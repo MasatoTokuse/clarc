@@ -6,8 +6,8 @@ import (
 	"context"
 
 	"github.com/google/wire"
-	"github.com/mtoku/di/app/gateways"
-	"github.com/mtoku/di/app/infrastructure"
+	"github.com/mtoku/clarc/app/gateways"
+	"github.com/mtoku/clarc/app/infrastructure"
 )
 
 func InitializeUserCreateService(constr infrastructure.DBConnectionString, ctx context.Context) (UserCreateService, error) {

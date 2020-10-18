@@ -3,7 +3,7 @@ package gateways
 import (
 	"fmt"
 
-	"github.com/mtoku/di/app/models"
+	"github.com/mtoku/clarc/app/models"
 )
 
 func NewInMemoryUserRepository() InMemoryUserRepository {
