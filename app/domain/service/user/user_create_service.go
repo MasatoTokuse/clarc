@@ -1,8 +1,8 @@
 package user
 
 import (
+	user_domain_model "github.com/mtoku/clarc/app/domain/models/user"
 	user_gateways "github.com/mtoku/clarc/app/gateways/user"
-	"github.com/mtoku/clarc/app/models"
 	user_usecase "github.com/mtoku/clarc/app/usecase/user"
 )
 
@@ -25,7 +25,7 @@ func (service UserCreateService) Handle(req user_usecase.UserCreateRequest) user
 			Error: err,
 		}
 	}
-	user := models.User{
+	user := user_domain_model.User{
 		UserID:   req.UserID,
 		Password: req.Password,
 		Nickname: req.Nickname,

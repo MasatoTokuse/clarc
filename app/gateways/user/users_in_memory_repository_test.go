@@ -3,7 +3,7 @@ package user
 import (
 	"testing"
 
-	"github.com/mtoku/clarc/app/models"
+	user_domain_model "github.com/mtoku/clarc/app/domain/models/user"
 )
 
 func TestInMemoryUserRepository(t *testing.T) {
@@ -12,7 +12,7 @@ func TestInMemoryUserRepository(t *testing.T) {
 		t.Error(err)
 	}
 
-	user1 := models.User{
+	user1 := user_domain_model.User{
 		UserID:   "TestInMemoryUserRepository.UserID=1",
 		Password: "TestInMemoryUserRepository.Password=1",
 		Nickname: "TestInMemoryUserRepository.Nickname=1",
@@ -21,7 +21,7 @@ func TestInMemoryUserRepository(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	user2 := models.User{
+	user2 := user_domain_model.User{
 		UserID:   "TestInMemoryUserRepository.UserID=2",
 		Password: "TestInMemoryUserRepository.Password=2",
 		Nickname: "TestInMemoryUserRepository.Nickname=2",

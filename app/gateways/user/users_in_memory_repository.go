@@ -3,7 +3,7 @@ package user
 import (
 	"fmt"
 
-	"github.com/mtoku/clarc/app/models"
+	user_domain_model "github.com/mtoku/clarc/app/domain/models/user"
 )
 
 func NewInMemoryUserRepository() InMemoryUserRepository {
@@ -12,13 +12,13 @@ func NewInMemoryUserRepository() InMemoryUserRepository {
 
 type InMemoryUserRepository struct {
 	increment int
-	Users     []models.User
+	Users     []user_domain_model.User
 }
 
-func (repo *InMemoryUserRepository) Save(user models.User) (*models.User, error) {
+func (repo *InMemoryUserRepository) Save(user user_domain_model.User) (*user_domain_model.User, error) {
 
 	if err := user.Valid(); err != nil {
-		return &models.User{}, err
+		return &user_domain_model.User{}, err
 	}
 
 	user.ID = repo.increment
@@ -28,9 +28,9 @@ func (repo *InMemoryUserRepository) Save(user models.User) (*models.User, error)
 	return &user, nil
 }
 
-func (repo *InMemoryUserRepository) FindBy(userID, password, nickname string) (*models.User, error) {
+func (repo *InMemoryUserRepository) FindBy(userID, password, nickname string) (*user_domain_model.User, error) {
 
-	ret := models.User{}
+	ret := user_domain_model.User{}
 	err := fmt.Errorf("No users")
 
 	for _, user := range repo.Users {
@@ -51,9 +51,9 @@ func (repo *InMemoryUserRepository) FindBy(userID, password, nickname string) (*
 	return &ret, err
 }
 
-func (repo *InMemoryUserRepository) Remove(target models.User) (*models.User, error) {
+func (repo *InMemoryUserRepository) Remove(target user_domain_model.User) (*user_domain_model.User, error) {
 
-	ret := models.User{}
+	ret := user_domain_model.User{}
 	err := fmt.Errorf("No users")
 
 	for i, user := range repo.Users {

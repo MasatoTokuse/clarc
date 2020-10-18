@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/mtoku/clarc/app/infrastructure"
-	"github.com/mtoku/clarc/app/models"
+	user_domain_model "github.com/mtoku/clarc/app/domain/models/user"
 )
 
 func TestSaveFindRemoveUser(t *testing.T) {
@@ -17,7 +17,7 @@ func TestSaveFindRemoveUser(t *testing.T) {
 	}
 	defer repo.CloseDB()
 
-	expected := &models.User{
+	expected := &user_domain_model.User{
 		UserID:   "mstmst11",
 		Password: "pass",
 		Nickname: "tks",
