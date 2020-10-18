@@ -5,9 +5,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/mtoku/clarc/app/api/request"
-	"github.com/mtoku/clarc/app/api/result"
 	user_usecase "github.com/mtoku/clarc/app/usecase/user"
+	"github.com/mtoku/clarc/app/viewmodel/core"
+	user_view_model "github.com/mtoku/clarc/app/viewmodel/user"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -23,9 +23,11 @@ type UserController struct {
 
 func (controller UserController) Create(w http.ResponseWriter, r *http.Request) {
 
-	userCreateResult := result.UserCreateAPIResult{
-		Status:  "0",
-		Message: "Success",
+	userCreateResult := user_view_model.UserCreateAPIResult{
+		core.APIResult{
+			Status:  "0",
+			Message: "Success",
+		},
 	}
 	defer func() {
 		json, _ := userCreateResult.MarshalJSON()
@@ -55,7 +57,7 @@ func (controller UserController) newUserCreateRequest(r *http.Request) (req user
 	if err != nil {
 		return
 	}
-	apiReq := &request.UserCreateAPIRequest{}
+	apiReq := &user_view_model.UserCreateAPIRequest{}
 	err = apiReq.UnmarshalJSON(body)
 	if err != nil {
 		return

@@ -7,10 +7,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mtoku/clarc/app/api/request"
-	"github.com/mtoku/clarc/app/api/result"
 	"github.com/mtoku/clarc/app/infrastructure"
 	"github.com/mtoku/clarc/app/testhelper"
+	user_view_model "github.com/mtoku/clarc/app/viewmodel/user"
 )
 
 func TestNewUserController(t *testing.T) {
@@ -33,7 +32,7 @@ func TestUserController_Create(t *testing.T) {
 	}
 
 	// テスト用のリクエストとレスポンスを作成
-	apiUserCreateRequest := &request.UserCreateAPIRequest{
+	apiUserCreateRequest := &user_view_model.UserCreateAPIRequest{
 		UserID:   "UserController_Create.UserID",
 		Password: "UserController_Create.Password",
 		Nickname: "UserController_Create.Nickname",
@@ -54,7 +53,7 @@ func TestUserController_Create(t *testing.T) {
 	}
 
 	// レスポンスのボディのテスト
-	userCreateResult := &result.UserCreateAPIResult{}
+	userCreateResult := &user_view_model.UserCreateAPIResult{}
 	err = userCreateResult.UnmarshalJSON(res.Body.Bytes())
 	if err != nil {
 		t.Error(err)

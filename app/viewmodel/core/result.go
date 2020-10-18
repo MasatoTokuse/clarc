@@ -1,6 +1,6 @@
-package result
+package core
 
-type UserCreateAPIResult struct {
+type APIResult struct {
 	Status  string `json:"Status"`
 	Message string `json:"Message"`
 }
