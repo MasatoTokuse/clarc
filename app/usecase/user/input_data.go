@@ -3,5 +3,5 @@ package user
 type UserCreateRequest struct {
 	UserID   string
 	Password string
-	Nickname string
+	Name     string
 }

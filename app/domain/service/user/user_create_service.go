@@ -22,7 +22,7 @@ func (service UserCreateService) Handle(req user_usecase.UserCreateRequest) user
 	user := user_domain_model.User{
 		UserID:   req.UserID,
 		Password: req.Password,
-		Nickname: req.Nickname,
+		Name:     req.Name,
 	}
 	if _, err := service.Repository.Save(user); err != nil {
 		return user_usecase.UserCreateResponse{

@@ -26,7 +26,7 @@ type User struct {
 	ID       int    `boil:"id" json:"id" toml:"id" yaml:"id"`
 	UserID   string `boil:"user_id" json:"user_id" toml:"user_id" yaml:"user_id"`
 	Password string `boil:"password" json:"password" toml:"password" yaml:"password"`
-	Nickname string `boil:"nickname" json:"nickname" toml:"nickname" yaml:"nickname"`
+	Name     string `boil:"name" json:"name" toml:"name" yaml:"name"`
 
 	R *userR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L userL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -36,12 +36,12 @@ var UserColumns = struct {
 	ID       string
 	UserID   string
 	Password string
-	Nickname string
+	Name     string
 }{
 	ID:       "id",
 	UserID:   "user_id",
 	Password: "password",
-	Nickname: "nickname",
+	Name:     "name",
 }
 
 // Generated where
@@ -96,12 +96,12 @@ var UserWhere = struct {
 	ID       whereHelperint
 	UserID   whereHelperstring
 	Password whereHelperstring
-	Nickname whereHelperstring
+	Name     whereHelperstring
 }{
 	ID:       whereHelperint{field: "`users`.`id`"},
 	UserID:   whereHelperstring{field: "`users`.`user_id`"},
 	Password: whereHelperstring{field: "`users`.`password`"},
-	Nickname: whereHelperstring{field: "`users`.`nickname`"},
+	Name:     whereHelperstring{field: "`users`.`name`"},
 }
 
 // UserRels is where relationship names are stored.
@@ -121,8 +121,8 @@ func (*userR) NewStruct() *userR {
 type userL struct{}
 
 var (
-	userAllColumns            = []string{"id", "user_id", "password", "nickname"}
-	userColumnsWithoutDefault = []string{"user_id", "password", "nickname"}
+	userAllColumns            = []string{"id", "user_id", "password", "name"}
+	userColumnsWithoutDefault = []string{"user_id", "password", "name"}
 	userColumnsWithDefault    = []string{"id"}
 	userPrimaryKeyColumns     = []string{"id"}
 )
@@ -670,7 +670,6 @@ func (o UserSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, col
 
 var mySQLUserUniqueColumns = []string{
 	"id",
-	"user_id",
 }
 
 // Upsert attempts an insert using an executor, and does an update or ignore on conflict.

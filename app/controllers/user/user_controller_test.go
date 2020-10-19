@@ -35,7 +35,7 @@ func TestUserController_Create(t *testing.T) {
 	apiUserCreateRequest := &user_view_model.UserCreateAPIRequest{
 		UserID:   "UserController_Create.UserID",
 		Password: "UserController_Create.Password",
-		Nickname: "UserController_Create.Nickname",
+		Name:     "UserController_Create.Name",
 	}
 	b, err := apiUserCreateRequest.MarshalJSON()
 	if err != nil {

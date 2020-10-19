@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/mtoku/clarc/app/infrastructure"
 	user_domain_model "github.com/mtoku/clarc/app/domain/models/user"
+	"github.com/mtoku/clarc/app/infrastructure"
 )
 
 func TestSaveFindRemoveUser(t *testing.T) {
@@ -20,7 +20,7 @@ func TestSaveFindRemoveUser(t *testing.T) {
 	expected := &user_domain_model.User{
 		UserID:   "mstmst11",
 		Password: "pass",
-		Nickname: "tks",
+		Name:     "tks",
 	}
 	result, err := repo.Save(*expected)
 	if err != nil {
@@ -30,14 +30,14 @@ func TestSaveFindRemoveUser(t *testing.T) {
 		t.Fatal("user.ID must not be Zero after save")
 	}
 
-	user, err := repo.FindBy(expected.UserID, expected.Password, expected.Nickname)
+	user, err := repo.FindBy(expected.UserID, expected.Password, expected.Name)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	repo.Remove(*user)
 
-	user, err = repo.FindBy(expected.UserID, expected.Password, expected.Nickname)
+	user, err = repo.FindBy(expected.UserID, expected.Password, expected.Name)
 	if err == nil {
 		t.Fatal(err)
 	}

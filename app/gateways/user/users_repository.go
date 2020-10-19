@@ -12,7 +12,7 @@ import (
 
 type IUserRepository interface {
 	Save(user user_domain_model.User) (*user_domain_model.User, error)
-	FindBy(userID, password, nickname string) (*user_domain_model.User, error)
+	FindBy(userID, password, name string) (*user_domain_model.User, error)
 	Remove(user user_domain_model.User) (*user_domain_model.User, error)
 	CloseDB() error
 }
@@ -38,7 +38,7 @@ func (repo UserRepository) Save(user user_domain_model.User) (*user_domain_model
 	dbUser := &models.User{
 		UserID:   user.UserID,
 		Password: user.Password,
-		Nickname: user.Nickname,
+		Name:     user.Name,
 	}
 
 	tx, err := repo.DB.Begin()
@@ -59,7 +59,7 @@ func (repo UserRepository) Save(user user_domain_model.User) (*user_domain_model
 	return &user, nil
 }
 
-func (repo UserRepository) FindBy(userID, password, nickname string) (*user_domain_model.User, error) {
+func (repo UserRepository) FindBy(userID, password, name string) (*user_domain_model.User, error) {
 
 	qm := make([]qm.QueryMod, 0)
 	if userID != "" {
@@ -68,8 +68,8 @@ func (repo UserRepository) FindBy(userID, password, nickname string) (*user_doma
 	if password != "" {
 		qm = append(qm, models.UserWhere.Password.EQ(password))
 	}
-	if nickname != "" {
-		qm = append(qm, models.UserWhere.Nickname.EQ(nickname))
+	if name != "" {
+		qm = append(qm, models.UserWhere.Name.EQ(name))
 	}
 
 	dbUser, err := models.Users(qm...).One(repo.Context, repo.DB)
@@ -81,7 +81,7 @@ func (repo UserRepository) FindBy(userID, password, nickname string) (*user_doma
 		ID:       dbUser.ID,
 		UserID:   dbUser.UserID,
 		Password: dbUser.Password,
-		Nickname: dbUser.Nickname,
+		Name:     dbUser.Name,
 	}
 
 	return user, nil
@@ -98,7 +98,7 @@ func (repo UserRepository) Remove(user user_domain_model.User) (*user_domain_mod
 		ID:       user.ID,
 		UserID:   user.UserID,
 		Password: user.Password,
-		Nickname: user.Nickname,
+		Name:     user.Name,
 	}
 
 	if _, err := dbUser.Delete(repo.Context, tx); err != nil {

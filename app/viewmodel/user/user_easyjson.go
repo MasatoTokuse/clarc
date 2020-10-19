@@ -113,8 +113,8 @@ func easyjson9e1087fdDecodeGithubComMtokuClarcAppViewmodelUser1(in *jlexer.Lexer
 			out.UserID = string(in.String())
 		case "Password":
 			out.Password = string(in.String())
-		case "Nickname":
-			out.Nickname = string(in.String())
+		case "Name":
+			out.Name = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -140,9 +140,9 @@ func easyjson9e1087fdEncodeGithubComMtokuClarcAppViewmodelUser1(out *jwriter.Wri
 		out.String(string(in.Password))
 	}
 	{
-		const prefix string = ",\"Nickname\":"
+		const prefix string = ",\"Name\":"
 		out.RawString(prefix)
-		out.String(string(in.Nickname))
+		out.String(string(in.Name))
 	}
 	out.RawByte('}')
 }

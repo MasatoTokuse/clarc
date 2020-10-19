@@ -15,7 +15,7 @@ func TestInMemoryUserRepository(t *testing.T) {
 	user1 := user_domain_model.User{
 		UserID:   "TestInMemoryUserRepository.UserID=1",
 		Password: "TestInMemoryUserRepository.Password=1",
-		Nickname: "TestInMemoryUserRepository.Nickname=1",
+		Name:     "TestInMemoryUserRepository.Name=1",
 	}
 	_, err = repo.Save(user1)
 	if err != nil {
@@ -24,14 +24,14 @@ func TestInMemoryUserRepository(t *testing.T) {
 	user2 := user_domain_model.User{
 		UserID:   "TestInMemoryUserRepository.UserID=2",
 		Password: "TestInMemoryUserRepository.Password=2",
-		Nickname: "TestInMemoryUserRepository.Nickname=2",
+		Name:     "TestInMemoryUserRepository.Name=2",
 	}
 	_, err = repo.Save(user2)
 	if err != nil {
 		t.Error(err)
 	}
 
-	found, err := repo.FindBy(user1.UserID, user1.Password, user1.Nickname)
+	found, err := repo.FindBy(user1.UserID, user1.Password, user1.Name)
 	if err != nil {
 		t.Error(err)
 	}
@@ -47,7 +47,7 @@ func TestInMemoryUserRepository(t *testing.T) {
 		t.Error("User.ID must be 1")
 	}
 
-	removed, err = repo.FindBy(user1.UserID, user1.Password, user1.Nickname)
+	removed, err = repo.FindBy(user1.UserID, user1.Password, user1.Name)
 	if err == nil {
 		t.Error("Not removed User.ID = 1")
 	}

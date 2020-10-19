@@ -32,9 +32,9 @@ func Test(t *testing.T) {
 	}
 
 	if err := user.Valid(); err == nil {
-		t.Error("Nickname is empty then, must be error")
+		t.Error("Name is empty then, must be error")
 	} else {
-		if err.Error() != "Nickname is empty. Please enter Nickname" {
+		if err.Error() != "Name is empty. Please enter Name" {
 			t.Error("validation error message is wrong")
 		}
 	}
@@ -42,7 +42,7 @@ func Test(t *testing.T) {
 	user = User{
 		UserID:   "1234567",
 		Password: "password",
-		Nickname: "nickname",
+		Name:     "name",
 	}
 
 	if err := user.Valid(); err == nil {
@@ -52,7 +52,7 @@ func Test(t *testing.T) {
 	user = User{
 		UserID:   "12345678",
 		Password: "password",
-		Nickname: "nickname",
+		Name:     "name",
 	}
 
 	if err := user.Valid(); err != nil {

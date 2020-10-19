@@ -28,7 +28,7 @@ func (repo *InMemoryUserRepository) Save(user user_domain_model.User) (*user_dom
 	return &user, nil
 }
 
-func (repo *InMemoryUserRepository) FindBy(userID, password, nickname string) (*user_domain_model.User, error) {
+func (repo *InMemoryUserRepository) FindBy(userID, password, name string) (*user_domain_model.User, error) {
 
 	ret := user_domain_model.User{}
 	err := fmt.Errorf("No users")
@@ -40,7 +40,7 @@ func (repo *InMemoryUserRepository) FindBy(userID, password, nickname string) (*
 		if password != "" && user.Password != password {
 			continue
 		}
-		if nickname != "" && user.Nickname != nickname {
+		if name != "" && user.Name != name {
 			continue
 		}
 		ret = user
@@ -63,7 +63,7 @@ func (repo *InMemoryUserRepository) Remove(target user_domain_model.User) (*user
 		if target.Password != "" && user.Password != target.Password {
 			continue
 		}
-		if target.Nickname != "" && user.Nickname != target.Nickname {
+		if target.Name != "" && user.Name != target.Name {
 			continue
 		}
 

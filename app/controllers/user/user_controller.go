@@ -65,7 +65,7 @@ func (controller UserController) newUserCreateRequest(r *http.Request) (req user
 
 	req.UserID = apiReq.UserID
 	req.Password = apiReq.Password
-	req.Nickname = apiReq.Nickname
+	req.Name = apiReq.Name
 
 	return
 }

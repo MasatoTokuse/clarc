@@ -32,7 +32,7 @@ func TestUserCreateService(t *testing.T) {
 	req := user_usecase.UserCreateRequest{
 		UserID:   "requestCreateUser.userID",
 		Password: "requestCreateUser.password",
-		Nickname: "requestCreateUser.nickname",
+		Name:     "requestCreateUser.name",
 	}
 
 	res := iUserCreateService.Handle(req)
