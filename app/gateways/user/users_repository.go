@@ -11,9 +11,9 @@ import (
 )
 
 type IUserRepository interface {
-	Save(user user_domain_model.User) (*user_domain_model.User, error)
+	Save(user *user_domain_model.User) (*user_domain_model.User, error)
 	FindBy(userID, password, name string) (*user_domain_model.User, error)
-	Remove(user user_domain_model.User) (*user_domain_model.User, error)
+	Remove(user *user_domain_model.User) (*user_domain_model.User, error)
 	CloseDB() error
 }
 
@@ -29,16 +29,12 @@ type UserRepository struct {
 	Context context.Context
 }
 
-func (repo UserRepository) Save(user user_domain_model.User) (*user_domain_model.User, error) {
-
-	if err := user.Valid(); err != nil {
-		return &user_domain_model.User{}, err
-	}
+func (repo UserRepository) Save(user *user_domain_model.User) (*user_domain_model.User, error) {
 
 	dbUser := &models.User{
-		UserID:   user.UserID,
-		Password: user.Password,
-		Name:     user.Name,
+		UserID:   user.UserID.Value(),
+		Password: user.Password.Value(),
+		Name:     user.Name.Value(),
 	}
 
 	tx, err := repo.DB.Begin()
@@ -56,7 +52,7 @@ func (repo UserRepository) Save(user user_domain_model.User) (*user_domain_model
 
 	user.ID = dbUser.ID
 
-	return &user, nil
+	return user, nil
 }
 
 func (repo UserRepository) FindBy(userID, password, name string) (*user_domain_model.User, error) {
@@ -77,17 +73,10 @@ func (repo UserRepository) FindBy(userID, password, name string) (*user_domain_m
 		return &user_domain_model.User{}, err
 	}
 
-	user := &user_domain_model.User{
-		ID:       dbUser.ID,
-		UserID:   dbUser.UserID,
-		Password: dbUser.Password,
-		Name:     dbUser.Name,
-	}
-
-	return user, nil
+	return user_domain_model.NewUser(dbUser.ID, dbUser.UserID, dbUser.UserID, dbUser.Name)
 }
 
-func (repo UserRepository) Remove(user user_domain_model.User) (*user_domain_model.User, error) {
+func (repo UserRepository) Remove(user *user_domain_model.User) (*user_domain_model.User, error) {
 
 	tx, err := repo.DB.Begin()
 	if err != nil {
@@ -96,9 +85,9 @@ func (repo UserRepository) Remove(user user_domain_model.User) (*user_domain_mod
 
 	dbUser := &models.User{
 		ID:       user.ID,
-		UserID:   user.UserID,
-		Password: user.Password,
-		Name:     user.Name,
+		UserID:   user.UserID.Value(),
+		Password: user.Password.Value(),
+		Name:     user.Name.Value(),
 	}
 
 	if _, err := dbUser.Delete(repo.Context, tx); err != nil {
@@ -109,7 +98,7 @@ func (repo UserRepository) Remove(user user_domain_model.User) (*user_domain_mod
 		return &user_domain_model.User{}, err
 	}
 
-	return &user, nil
+	return user, nil
 }
 
 func (repo UserRepository) CloseDB() error {

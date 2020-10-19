@@ -17,12 +17,9 @@ func TestSaveFindRemoveUser(t *testing.T) {
 	}
 	defer repo.CloseDB()
 
-	expected := &user_domain_model.User{
-		UserID:   "mstmst11",
-		Password: "pass",
-		Name:     "tks",
-	}
-	result, err := repo.Save(*expected)
+	expected, _ := user_domain_model.NewUser(0, "mstmst11", "pass", "tks")
+
+	result, err := repo.Save(expected)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -30,14 +27,14 @@ func TestSaveFindRemoveUser(t *testing.T) {
 		t.Fatal("user.ID must not be Zero after save")
 	}
 
-	user, err := repo.FindBy(expected.UserID, expected.Password, expected.Name)
+	user, err := repo.FindBy(expected.UserID.Value(), expected.Password.Value(), expected.Name.Value())
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	repo.Remove(*user)
+	repo.Remove(user)
 
-	user, err = repo.FindBy(expected.UserID, expected.Password, expected.Name)
+	user, err = repo.FindBy(expected.UserID.Value(), expected.Password.Value(), expected.Name.Value())
 	if err == nil {
 		t.Fatal(err)
 	}
