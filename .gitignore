@@ -16,3 +16,6 @@
 docker/var
 
 go.sum
+
+.go
+__debug_bin

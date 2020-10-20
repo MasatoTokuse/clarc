@@ -1,4 +1,5 @@
 {
+  "go.gopath" : "${workspaceFolder}/.go",
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#4f1252",
     "titleBar.activeForeground": "#dcdcdc",
@@ -6,5 +7,6 @@
     "activityBar.foreground": "#dcdcdc",
     "statusBar.background": "#eebc50",
     "statusBar.foreground": "#2e2e2e"
-  }
+  },
+  "editor.formatOnSave": true
 }

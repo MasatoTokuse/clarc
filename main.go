@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"github.com/mtoku/clarc/app/cmd"
+)
 
 func main() {
-	fmt.Println("vs-go")
+	cmd.Execute()
 }

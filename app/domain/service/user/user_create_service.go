@@ -17,8 +17,6 @@ type UserCreateService struct {
 }
 
 func (service UserCreateService) Handle(req user_usecase.UserCreateRequest) user_usecase.UserCreateResponse {
-	defer service.Repository.CloseDB()
-
 	user, err := user_domain_model.NewUser(0, req.UserID, req.Password, req.Name)
 	if err != nil {
 		return user_usecase.UserCreateResponse{
