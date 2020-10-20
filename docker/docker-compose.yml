@@ -15,3 +15,18 @@ services:
       MYSQL_PASSWORD: pass
     volumes:
       - ./var/mysqldb:/var/lib/mysql
+  clarc-postgresql:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgresql
+    container_name: clarc-postgresql
+    network_mode: bridge
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: clarc
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - ./var/postgresql:/var/lib/postgresql/data
+      - ./postgresql:/docker-entrypoint-initdb.d
