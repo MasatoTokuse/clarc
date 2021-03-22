@@ -23,7 +23,7 @@ func NewTestMySQLConnectionString() DBConnectionString {
 	cnf.User = "admin"
 	cnf.Passwd = "pass"
 	cnf.Net = "tcp"
-	cnf.Addr = "localhost:3306"
+	cnf.Addr = "clarc-mysql:3306"
 	cnf.DBName = "clarc"
 	cnf.ParseTime = true
 	cnf.Loc = time.Local
